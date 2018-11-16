@@ -45,6 +45,30 @@ app.get('/api/towns', async function (req, res) {
 });
 
 app.post('/api/reg_number', async function (req, res) {
+    try {
+        const regNumber = req.body.reg_number;
+        const startsWith = regNumber.split(' ')[0].trim();
+
+        // find town id
+        const findTownSQL = 'select * from town where reg_number_start = $1';
+        const townResults = await pool.query(findTownSQL, [startsWith]);
+        const town = townResults.rows[0];
+        const townId = town.id;
+
+        const addTownSQL = 'insert into reg_number (full_reg_number, town_id) values ($1, $2)';
+        await pool.query(addTownSQL, [regNumber, townId]);
+
+        res.json({
+            status: 'success'
+        });
+    } catch (err) {
+        console.log(err);
+        res.json({
+            status: 'error',
+            error: err
+        });
+    }
+
     // add a reg_number here
 });
 
@@ -52,9 +76,10 @@ app.get('/api/reg_number/:reg_start', async function (req, res) {
     // filter for all reg numbers from a town
 });
 
-// app.get('/', function (req, res) {
-//     res.render('home', { user: req.user });
-// });
+app.get('/api/reg_numbers', async function (req, res) {
+    let results = await pool.query('select * from reg_number');
+    res.json(results.rows);
+});
 
 const PORT = process.env.PORT || 3010;
 
