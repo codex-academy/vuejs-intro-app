@@ -52,8 +52,6 @@ app.get('/api/reg_number/:reg_start', async function (req, res) {
     // filter for all reg numbers from a town
 });
 
-
-
 // app.get('/', function (req, res) {
 //     res.render('home', { user: req.user });
 // });

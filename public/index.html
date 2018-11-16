@@ -10,25 +10,29 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     
 </head>
-<body>
-    <h1>Registration Numbers with VueJS</h1>
-    <div class="input">
-        <input type="text" placeholder="Enter your reg number...">
-        <input type="button" value="Add Registration Number">
+<body class="" >
+    <div class="containter regNumberApp">
+            <h1>Registration Numbers with VueJS</h1>
+            <div class="input">
+                <input type="text" v-model="regNumber" placeholder="Enter your reg number...">
+                <input type="button" v-if="regNumber.length > 3" v-on:click="addRegNumber" value="Add Registration Number">
+            </div>
+            <div class="input">
+                <select name="" id="">
+        
+                </select>
+                <input type="button" value="Filter">
+            </div>
+            <div class="reg_numbers">
+                <ul>
+                    <li v-for="regNum in regNumbers" class="reg_number">
+                        {{regNum}}
+                    </li>
+                    
+                </ul>
+            </div>
     </div>
-    <div class="input">
-        <select name="" id="">
-
-        </select>
-        <input type="button" value="Filter">
-    </div>
-    <div class="reg_numbers">
-        <ul>
-            <li class="reg_number">
-                CY 53588
-            </li>
-        </ul>
-    </div>
+    
 </body>
 <script src="app.js"></script>
 </html>
