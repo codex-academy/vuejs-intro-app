@@ -5,7 +5,8 @@ let regNumberApp = new Vue({
     el: '.regNumberApp',
     data: {
         regNumbers: [],
-        regNumber: ''
+        regNumber: '',
+        towns: []
     },
     methods: {
         addRegNumber: function () {
@@ -14,5 +15,14 @@ let regNumberApp = new Vue({
                 this.regNumber = '';
             }
         }
+    },
+
+    mounted: function () {
+        let self = this;
+        axios
+            .get('/api/towns')
+            .then(function (results) {
+                self.towns = results.data;
+            });
     }
 });

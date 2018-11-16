@@ -19,7 +19,7 @@
             </div>
             <div class="input">
                 <select name="" id="">
-        
+                    <option value=""  v-for="town in towns" v-bind:value="town.id"  >{{town.town_name}}</option>
                 </select>
                 <input type="button" value="Filter">
             </div>

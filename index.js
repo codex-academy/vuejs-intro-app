@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/api/towns', async function (req, res) {
-    // let results = await pool.query('select * from town');
-    // res.json(results.rows);
+    let results = await pool.query('select * from town');
+    res.json(results.rows);
 });
 
 app.post('/api/reg_number', async function (req, res) {
