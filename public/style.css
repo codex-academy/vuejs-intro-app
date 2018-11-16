@@ -13,6 +13,14 @@ input[type='text'], input[type='button'], input[type='select'] {
     /* border : 1px solid; */
 }
 
+.error {
+    background-color: pink;
+    border: 1px solid red;
+    width : 20em;
+    padding : 1em;
+    margin: 1em;
+}
+
 .reg_numbers li {
     list-style: none;
     border : solid 0.1em;

@@ -6,7 +6,8 @@ let regNumberApp = new Vue({
     data: {
         regNumbers: [],
         regNumber: '',
-        towns: []
+        towns: [],
+        error: ''
     },
     methods: {
         addRegNumber: function () {
@@ -19,15 +20,11 @@ let regNumberApp = new Vue({
                         self.regNumbers.push(self.regNumber);
                         self.regNumber = '';
                     } else {
-                        alert('ooops something went wrong!');
-                        console.log(result.data.error);
+                        // alert('ooops something went wrong!');
+                        // console.log(result.data.error);
+                        self.error = result.data.error;
                     }
                 });
-
-            // if (this.regNumber !== '') {
-            //     this.regNumbers.push(this.regNumber);
-            //     this.regNumber = '';
-            // }
         }
     },
 
@@ -42,9 +39,10 @@ let regNumberApp = new Vue({
             .get('/api/reg_numbers')
             .then(function (results) {
                 let regNumbers = results.data;
-                self.regNumbers = regNumbers.map(reg => reg.full_reg_number);
-                //  = re;
-                // );
+                // convert the list of objects into a list of strings.
+                self.regNumbers = regNumbers.map(function (reg) {
+                    return reg.full_reg_number;
+                });
             });
     }
 });

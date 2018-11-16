@@ -54,6 +54,13 @@ app.post('/api/reg_number', async function (req, res) {
         const townResults = await pool.query(findTownSQL, [startsWith]);
         const town = townResults.rows[0];
         const townId = town.id;
+        if (!townId) {
+            res.json({
+                status: 'error',
+                error: 'Reg number not for registered town: ' + regNumber
+            });
+        }
+
 
         const addTownSQL = 'insert into reg_number (full_reg_number, town_id) values ($1, $2)';
         await pool.query(addTownSQL, [regNumber, townId]);
@@ -65,7 +72,7 @@ app.post('/api/reg_number', async function (req, res) {
         console.log(err);
         res.json({
             status: 'error',
-            error: err
+            error: err.message
         });
     }
 
