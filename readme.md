@@ -1,2 +1,2 @@
-# Using VueJS with a WebApp intro
+# Ho to use VueJS with a WebApp
 
